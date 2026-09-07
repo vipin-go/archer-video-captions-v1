@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 2,
+  "commandKey": "video-captions",
+  "label": "Video Captions & Titles",
+  "resourceKey": "workflow.archer.video-captions-v1",
+  "nodes": [
+    { "id": "slash:video-captions", "kind": "slash", "label": "/video-captions", "description": "Start from real, approved footage.", "meta": { "commandKey": "video-captions", "trigger": "video-captions" } },
+    { "id": "intake:footage-url", "kind": "pre_run_intake", "label": "Footage URL", "description": "A reachable HTTPS URL to the real footage to edit.", "meta": { "stepId": "archer-video-footage-url" } },
+    { "id": "workflow:video-captions", "kind": "execution", "label": "video-use captioning sandbox", "description": "Clones video-use into an E2B sandbox and burns in titles and word-level synced captions.", "meta": { "workflowRef": { "kind": "workflow", "resourceKey": "workflow.archer.video-captions-v1" } } }
+  ],
+  "edges": [
+    { "id": "edge:slash:intake", "source": "slash:video-captions", "target": "intake:footage-url", "relation": "continues", "label": "intake" },
+    { "id": "edge:intake:workflow", "source": "intake:footage-url", "target": "workflow:video-captions", "relation": "executes" }
+  ],
+  "relatedTodoIds": []
+}

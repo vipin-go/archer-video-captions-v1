@@ -1,0 +1,15 @@
+{
+  "name": "@vipin-go/archer-video-captions-v1",
+  "version": "1.0.0",
+  "description": "Portable Archer video captions and titles workflow definition (video-use powered)",
+  "keywords": ["gabriel-operator", "workflow", "skills", "automation", "ai-agent"],
+  "license": "MIT",
+  "dependencies": { "ajv": "^8.20.0" },
+  "engines": {
+    "node": ">=16"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vipin-go/archer-video-captions-v1.git"
+  }
+}

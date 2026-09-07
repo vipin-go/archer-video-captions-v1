@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 2,
+  "kind": "persona_slash_command",
+  "commandKey": "video-captions",
+  "commandTrigger": "video-captions",
+  "commandLabel": "Video Captions & Titles",
+  "commandDescription": "Burn synced word-level captions and a title onto your real event footage using an AI video-editing sandbox (video-use).",
+  "personaRef": { "kind": "persona", "resourceKey": "persona.archer" },
+  "workflowRef": { "kind": "workflow", "resourceKey": "workflow.archer.video-captions-v1" },
+  "personaRepository": {
+    "remoteUrl": "https://github.com/vipin-go/persona-archer.git",
+    "defaultBranch": "main",
+    "configPath": "assets/chat-config.json",
+    "owns": ["command trigger", "label and description", "enabled state", "pre-run intake", "Operator workflow reference"]
+  },
+  "workflowRepository": {
+    "remoteUrl": "https://github.com/vipin-go/archer-video-captions-v1.git",
+    "defaultBranch": "main",
+    "workflowPath": "assets/workflow.json",
+    "slashConnectionsPath": "assets/slash-connections.json",
+    "owns": ["executable workflow steps", "sandbox and coding-agent configuration", "video-use integration prompt"]
+  }
+}

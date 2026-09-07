@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 2,
+  "resourceKey": "workflow.archer.video-captions-v1",
+  "structure": {
+    "name": "Archer Video Captions & Titles",
+    "actionName": "Video Captions & Titles",
+    "baseUrl": "",
+    "autoRecoveryEnabled": false,
+    "parameters": {
+      "execute": [
+        { "name": "footage_url", "type": "string", "required": true },
+        { "name": "conversation_language", "type": "string", "required": false },
+        { "name": "caption_style", "type": "string", "required": false, "default": "two-word uppercase, speech-synced" }
+      ]
+    },
+    "groups": [],
+    "steps": [
+      {
+        "step_number": 1,
+        "stepId": "step-b3001",
+        "action_type": "navigate",
+        "intent": "Initialize the authenticated Archer command without navigating to an unvalidated destination.",
+        "url": "",
+        "value": "",
+        "selectors": [],
+        "disableBrowser": true,
+        "timestamp": 1788500000000
+      },
+      {
+        "step_number": 2,
+        "stepId": "step-b3002",
+        "action_type": "coding_agent",
+        "userPrompt": "Use {{conversation_language}} for every user-facing status or explanation you print, when it is provided; otherwise write in English. Never invent footage content, dialogue, or events that are not present in the supplied source file -- you are editing real, user-approved footage only, not generating new video. Step 1: clone https://github.com/browser-use/video-use.git into your working directory (do not assume it is already present) and follow its own install.md exactly to set it up -- install ffmpeg/ffprobe if missing, install its Python dependencies (requests, librosa, matplotlib, pillow, numpy) via `uv sync` or `pip install -e .`, and confirm ELEVENLABS_API_KEY is present in the environment before proceeding (it is provided to you as an environment variable; if it is missing, stop and report that clearly instead of guessing or fabricating a key). Step 2: download the real source footage from {{footage_url}} into the project directory. Step 3: read video-use's own SKILL.md and reference docs end to end before editing anything, and follow its documented workflow exactly (it manages its own project.md state file -- create and use one). Step 4: your top priority is burned-in titles and word-level, speech-synced captions: run video-use's transcription step (ElevenLabs Scribe, word-level timestamps) and use its native captioning approach to burn in synced subtitle text using style {{caption_style}}; add a clear title card/overlay for the event or moment being shown, grounded only in what the footage and any provided event details actually show. Apply video-use's other default enhancements (filler-word/dead-space removal, color grade, audio fades at cuts) only if they do not risk cutting content the user needs -- prioritize caption accuracy and timing above cosmetic edits, and if any step fails, continue with the remaining pipeline rather than aborting the whole edit. Step 5: run video-use's own self-evaluation step on the final render before finishing. Step 6: write the final rendered file to /home/user/output/final.mp4 exactly (create the directory if needed) -- this exact path is what the platform will read back after you finish; do not use any other path or filename. Step 7: in your final message, state the output path you wrote, a one-paragraph summary of what was captioned/titled, and any step of video-use's pipeline that failed or was skipped and why.",
+        "sandboxAgentConfig": {
+          "agentType": "coding",
+          "codingModel": "claude_code",
+          "gitRepoUrl": "https://github.com/browser-use/video-use.git",
+          "gitBranch": "main",
+          "sandboxProvider": "e2b",
+          "sandboxTimeout": 1800
+        },
+        "timestamp": 1788500000001
+      }
+    ]
+  },
+  "commitMessage": "Add Archer video captions/titles workflow using video-use"
+}
